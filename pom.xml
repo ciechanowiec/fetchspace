@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>eu.ciechanowiec</groupId>
+        <artifactId>sling.rocket.parent</artifactId>
+        <version>13.32.0</version>
+    </parent>
+
+    <groupId>eu.ciechanowiec</groupId>
+    <artifactId>fetchspace</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <name>Fetch Space - Parent POM</name>
+    <description>Parent POM for Fetch Space</description>
+
+    <modules>
+        <module>all</module>
+        <module>application</module>
+        <module>bundle</module>
+        <module>osgiconfig</module>
+    </modules>
+
+    <properties>
+        <sling.host>localhost</sling.host>
+        <sling.port>8080</sling.port>
+        <sling.user>admin</sling.user>
+        <bundle.category>Fetch Space</bundle.category>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>eu.ciechanowiec</groupId>
+                <artifactId>sling.rocket.telegram</artifactId>
+                <version>1.0.10</version>
+            </dependency>
+            <dependency>
+                <groupId>eu.ciechanowiec</groupId>
+                <artifactId>org.telegram_telegrambots-api</artifactId>
+                <version>8.0.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <!-- @SuppressFBWarnings annotation for SpotBugs: -->
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-annotations</artifactId>
+            <optional>true</optional>
+            <!-- Although @SuppressFBWarnings annotation, for which this dependency is added,
+                 has a CLASS retention policy, in fact it isn't required during runtime or
+                 on the final classpath -->
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>io.wcm.maven.plugins</groupId>
+                    <artifactId>wcmio-content-package-maven-plugin</artifactId>
+                    <configuration>
+                        <serviceURL>http://${sling.host}:${sling.port}/bin/cpm/</serviceURL>
+                        <userId>${sling.user}</userId>
+                        <password>${sling.password}</password>
+                        <bundleStatusURL>http://${sling.host}:${sling.port}/system/console/bundles/.json
+                        </bundleStatusURL>
+                        <bundleStatusWaitLimit>120</bundleStatusWaitLimit>
+                        <force>true</force>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.sling</groupId>
+                    <artifactId>sling-maven-plugin</artifactId>
+                    <configuration>
+                        <slingUrl>http://${sling.host}:${sling.port}/system/console</slingUrl>
+                        <user>${sling.user}</user>
+                        <password>${sling.password}</password>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

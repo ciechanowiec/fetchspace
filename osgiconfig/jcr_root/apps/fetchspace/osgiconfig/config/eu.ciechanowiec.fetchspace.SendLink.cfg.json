@@ -1,0 +1,3 @@
+{
+  "chats-with-moderators.ids": "$[env:CHATS_WITH_MODERATORS_IDS;type=String[];delimiter=,default=]"
+}

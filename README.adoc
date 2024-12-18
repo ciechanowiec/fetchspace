@@ -1,0 +1,108 @@
+[.text-justify]
+= Fetch Space
+:reproducible:
+:doctype: article
+:author: Herman Ciechanowiec
+:email: herman@ciechanowiec.eu
+:chapter-signifier:
+:sectnums:
+:sectnumlevels: 5
+:sectanchors:
+:toc: left
+:toclevels: 5
+:icons: font
+// Docinfo is used for foldable TOC.
+// -> For full usage example see https://github.com/remkop/picocli
+:docinfo: shared,private
+:linkcss:
+:stylesdir: https://www.ciechanowiec.eu/linux_mantra/
+:stylesheet: adoc-css-style.css
+
+== Overview
+_Fetch Space_ is a https://telegram.org/[Telegram] bot that instantly generates a shareable link for any file the user uploads. The user sends a file, and receives a public internet link to easily share it with anyone.
+
+== Features
+[upperalpha]
+. *Unlimited Uploads*
++
+Share as many files as you like - there's no limit.
+
+. *Anonymous Downloads*
++
+The links you generate don't require any account or registration to access.
+. *Free. Forever*
++
+We pay for hosting so that you don't need to.
+
+. *Integrated with Telegram*
++
+No need to install separate apps. Everything works right within Telegram.
+
+== Usage
+[upperalpha]
+. *Start the Bot*
++
+Open https://t.me/FetchSpaceBot on Telegram and start the bot.
+.  *Upload Your File*
++
+In the chat input area, select _File_ as the input type and send it to the bot. Besides _File_ as input type, the bot also accepts videos from gallery, music and voice messages.
+
+. *Get Your Link*
++
+The bot will respond with a public link to the file you uploaded, such as https://fetchspace.org/api/assets.download.41d66272-51c0-4511-9b07-30e69e0c62ff.zip. Anyone who has the link can anonymously, without login and registration download the file.
+
+. *Manage Your Files*
++
+Want to deactivate your links? Issue a `/clear` command to delete all files you've uploaded to the bot. Once deleted, the links to deleted files will no longer work.
+
+== Technical Aspects
+=== General
+[upperalpha]
+. _Fetch Space_ runs inside https://github.com/ciechanowiec/sling_rocket[Sling Rocket] web framework.
+. _Fetch Space_ uses https://github.com/ciechanowiec/sling_tg[Sling TG] addon to https://github.com/ciechanowiec/sling_rocket[Sling Rocket] web framework for integration with Telegram.
+. The purpose of _Fetch Space_ is to show the example of a production application based on https://github.com/ciechanowiec/sling_rocket[Sling Rocket] and https://github.com/ciechanowiec/sling_tg[Sling TG].
+
+=== Deployment
+The steps below describe the deployment procedure of a new instance of a _Fetch Space_ application.
+[upperalpha]
+. Remove all preceding _Fetch Space_ containers, images, volumes and networks:
+
+    docker stop rocket-instance rocket-nginx backup; docker rm rocket-instance rocket-nginx backup; docker volume rm rocket-data; docker network rm rocket-network
+
+. Go to the root of this code repository in terminal.
+. Create a `.env` file in the root of this code repository and set there required deployment variables. The file should have this structure:
++
+[source,bash]
+....
+COMPOSE_PARALLEL_LIMIT=1
+RUN_MODES=prod
+IS_STAGING_ENV=true
+BOT_TOKEN_PROD=...
+BOT_TOKEN_STAGING=...
+CHATS_WITH_MODERATORS_IDS=...
+....
+
+. Start https://github.com/ciechanowiec/sling_rocket[Sling Rocket]:
+
+    docker compose up -d
+
+. Set a new password for the `admin` user of https://github.com/ciechanowiec/sling_rocket[Sling Rocket]:
++
+[source,bash]
+....
+curl --user "admin:admin" --verbose -FoldPwd=admin -FnewPwd=NEW_PASSWORD -FnewPwdConfirm=NEW_PASSWORD \
+  http://localhost:8080/system/userManager/user/admin.changePassword.html
+....
+
+. Build the _Fetch Space_ application and deploy it into the running _Sling Rocket_ instance:
+
+    mvn clean install -P installAll -D sling.password=NEW_PASSWORD
+
+== License
+The program is subject to MIT No Attribution License
+
+Copyright © 2024-2025 Herman Ciechanowiec
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so.
+
+The Software is provided 'as is', without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the Software or the use or other dealings in the Software.

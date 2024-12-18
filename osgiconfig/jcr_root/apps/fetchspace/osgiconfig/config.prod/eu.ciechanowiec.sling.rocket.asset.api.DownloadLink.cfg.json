@@ -1,0 +1,6 @@
+{
+  "protocol": "https",
+  "hostname": "fetchspace.org",
+  "include-port": false,
+  "port": 443
+}

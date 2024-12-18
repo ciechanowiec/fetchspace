@@ -1,0 +1,10 @@
+{
+  "org.apache.sling.commons.log.names": [
+    "eu.ciechanowiec.fetchspace",
+    "eu.ciechanowiec.sling.telegram",
+    "eu.ciechanowiec.sling.rocket"
+  ],
+  "org.apache.sling.commons.log.level": "DEBUG",
+  "org.apache.sling.commons.log.file": "logs/fetchspace.log",
+  "org.apache.sling.commons.log.additiv": "false"
+}

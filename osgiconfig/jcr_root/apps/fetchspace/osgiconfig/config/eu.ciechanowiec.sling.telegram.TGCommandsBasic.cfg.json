@@ -1,0 +1,6 @@
+{
+  "tg-commands.mappings": [
+    "/start###start the bot###true",
+    "/clear###delete all uploaded files###true"
+  ]
+}

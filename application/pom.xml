@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>eu.ciechanowiec</groupId>
+        <artifactId>fetchspace</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>fetchspace.application</artifactId>
+    <packaging>content-package</packaging>
+
+    <name>Fetch Space - Application Code</name>
+    <description>Application code like scripts and resource types</description>
+
+    <properties>
+        <validRoot>/apps/fetchspace</validRoot>
+        <filterRoot>${validRoot}/application</filterRoot>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.jackrabbit</groupId>
+                <artifactId>filevault-package-maven-plugin</artifactId>
+                <configuration>
+                    <packageType>application</packageType>
+                    <validatorsSettings>
+                        <jackrabbit-filter>
+                            <options>
+                                <validRoots>${validRoot}</validRoots>
+                            </options>
+                        </jackrabbit-filter>
+                    </validatorsSettings>
+                    <filters>
+                        <filter>
+                            <root>${filterRoot}</root>
+                            <mode>replace</mode>
+                        </filter>
+                    </filters>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>installPackageSeparately</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.wcm.maven.plugins</groupId>
+                        <artifactId>wcmio-content-package-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>install-all</id>
+                                <goals>
+                                    <goal>install</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

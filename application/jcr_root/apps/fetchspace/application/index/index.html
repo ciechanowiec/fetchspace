@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--  Viewport as per Bootstrap documentation  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--  Bootstrap CSS  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KCjxzdmcgd2lkdGg9IjgwMHB4IiBoZWlnaHQ9IjgwMHB4IiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgaWQ9IkxheWVyXzEiIHZlcnNpb249IjEuMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgZmlsbD0iIzAwMDAwMCI+Cgo8ZyBpZD0iU1ZHUmVwb19iZ0NhcnJpZXIiIHN0cm9rZS13aWR0aD0iMCIvPgoKPGcgaWQ9IlNWR1JlcG9fdHJhY2VyQ2FycmllciIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cgo8ZyBpZD0iU1ZHUmVwb19pY29uQ2FycmllciI+IDxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+IC5zdDB7ZmlsbDojMjk3ZmZkO30gLnN0MXtmaWxsOiMzQjQ2NTI7fSA8L3N0eWxlPiA8Zz4gPHBhdGggY2xhc3M9InN0MCIgZD0iTTMzMy4yLDI0Mi41YzEuNi01LjYsMi41LTExLjYsMi41LTE3LjhjMC0zNS44LTI5LTY0LjctNjQuNy02NC43Yy0yOS4yLDAtNTMuOSwxOS40LTYyLDQ1LjkgYy00LjItMC43LTguNi0xLjEtMTMtMS4xYy00NC41LDAtODAuNiwzNi4xLTgwLjYsODAuNmMwLDQ0LjUsMzYuMSw4MC42LDgwLjYsODAuNmgxMzVjMzQuMSwwLDYxLjgtMjcuNyw2MS44LTYxLjggQzM5Mi44LDI3MC44LDM2Ni4zLDI0My42LDMzMy4yLDI0Mi41eiIvPiA8cGF0aCBjbGFzcz0ic3QxIiBkPSJNMTI3LjIsMTAxaDU4Ljl2NTAuN2MwLDMuOSwzLjEsNyw3LDdzNy0zLjEsNy03Vjk0YzAtMy45LTMuMS03LTctN2gtNjYuN2MtMy41LTEwLjQtMTMuNC0xOC0yNS0xOCBDODYuOSw2OSw3NSw4MC44LDc1LDk1LjRzMTEuOCwyNi40LDI2LjQsMjYuNEMxMTQsMTIxLjgsMTI0LjYsMTEyLjgsMTI3LjIsMTAxeiBNMTAxLjQsMTA3LjhjLTYuOCwwLTEyLjQtNS42LTEyLjQtMTIuNCBTOTQuNiw4MywxMDEuNCw4M3MxMi40LDUuNiwxMi40LDEyLjRTMTA4LjIsMTA3LjgsMTAxLjQsMTA3Ljh6Ii8+IDxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik00MjksMTIxLjhjMTQuNSwwLDI2LjQtMTEuOCwyNi40LTI2LjRTNDQzLjUsNjksNDI5LDY5Yy0xMS42LDAtMjEuNSw3LjYtMjUsMThoLTY2LjdjLTMuOSwwLTcsMy4xLTcsN3Y1Ny43IGMwLDMuOSwzLjEsNyw3LDdzNy0zLjEsNy03VjEwMWg1OC45QzQwNS44LDExMi44LDQxNi4zLDEyMS44LDQyOSwxMjEuOHogTTQyOSw4M2M2LjgsMCwxMi40LDUuNiwxMi40LDEyLjRzLTUuNiwxMi40LTEyLjQsMTIuNCBzLTEyLjQtNS42LTEyLjQtMTIuNFM0MjIuMSw4Myw0MjksODN6Ii8+IDxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0yNTUuMSw3MC4zdjYzLjJjMCwzLjksMy4xLDcsNyw3czctMy4xLDctN1Y3MC4zYzExLjItMy4xLDE5LjQtMTMuMywxOS40LTI1LjRjMC0xNC41LTExLjgtMjYuNC0yNi40LTI2LjQgcy0yNi40LDExLjgtMjYuNCwyNi40QzIzNS43LDU3LDI0NCw2Ny4yLDI1NS4xLDcwLjN6IE0yNjIuMSwzMi41YzYuOCwwLDEyLjQsNS42LDEyLjQsMTIuNHMtNS42LDEyLjQtMTIuNCwxMi40IHMtMTIuNC01LjYtMTIuNC0xMi40UzI1NS4zLDMyLjUsMjYyLjEsMzIuNXoiLz4gPHBhdGggY2xhc3M9InN0MSIgZD0iTTg1LjgsMjU1LjhINTMuMXYtNDAuOWMxMS44LTIuNiwyMC44LTEzLjIsMjAuOC0yNS44YzAtMTQuNS0xMS44LTI2LjQtMjYuNC0yNi40UzIxLjEsMTc0LjUsMjEuMSwxODkgYzAsMTEuNiw3LjYsMjEuNSwxOCwyNXY0OC43YzAsMy45LDMuMSw3LDcsN2gzOS43YzMuOSwwLDctMy4xLDctN1M4OS42LDI1NS44LDg1LjgsMjU1Ljh6IE0zNS4xLDE4OWMwLTYuOCw1LjYtMTIuNCwxMi40LTEyLjQgczEyLjQsNS42LDEyLjQsMTIuNHMtNS42LDEyLjQtMTIuNCwxMi40UzM1LjEsMTk1LjksMzUuMSwxODl6Ii8+IDxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik04NS44LDMxOC4xSDU4LjVjLTMuMS0xMS4yLTEzLjMtMTkuNC0yNS40LTE5LjRjLTE0LjUsMC0yNi40LDExLjgtMjYuNCwyNi40czExLjgsMjYuNCwyNi40LDI2LjQgYzEyLjEsMCwyMi4zLTguMiwyNS40LTE5LjRoMjcuMmMzLjksMCw3LTMuMSw3LTdTODkuNiwzMTguMSw4NS44LDMxOC4xeiBNMzMuMSwzMzcuNGMtNi44LDAtMTIuNC01LjYtMTIuNC0xMi40IHM1LjYtMTIuNCwxMi40LTEyLjRzMTIuNCw1LjYsMTIuNCwxMi40UzM5LjksMzM3LjQsMzMuMSwzMzcuNHoiLz4gPHBhdGggY2xhc3M9InN0MSIgZD0iTTQ3Mi45LDM2MHYtNDguN2MwLTMuOS0zLjEtNy03LTdoLTM5LjdjLTMuOSwwLTcsMy4xLTcsN3MzLjEsNyw3LDdoMzIuN3Y0MC45Yy0xMS44LDIuNi0yMC44LDEzLjItMjAuOCwyNS44IGMwLDE0LjUsMTEuOCwyNi40LDI2LjQsMjYuNHMyNi40LTExLjgsMjYuNC0yNi40QzQ5MC45LDM3My40LDQ4My4zLDM2My41LDQ3Mi45LDM2MHogTTQ2NC41LDM5Ny40Yy02LjgsMC0xMi40LTUuNi0xMi40LTEyLjQgczUuNi0xMi40LDEyLjQtMTIuNHMxMi40LDUuNiwxMi40LDEyLjRTNDcxLjMsMzk3LjQsNDY0LjUsMzk3LjR6Ii8+IDxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik00NzguOSwyMjIuNmMtMTIuMSwwLTIyLjMsOC4yLTI1LjQsMTkuNGgtMjcuMmMtMy45LDAtNywzLjEtNyw3czMuMSw3LDcsN2gyNy4yYzMuMSwxMS4yLDEzLjMsMTkuNCwyNS40LDE5LjQgYzE0LjUsMCwyNi40LTExLjgsMjYuNC0yNi40UzQ5My40LDIyMi42LDQ3OC45LDIyMi42eiBNNDc4LjksMjYxLjRjLTYuOCwwLTEyLjQtNS42LTEyLjQtMTIuNHM1LjYtMTIuNCwxMi40LTEyLjQgczEyLjQsNS42LDEyLjQsMTIuNFM0ODUuNywyNjEuNCw0NzguOSwyNjEuNHoiLz4gPHBhdGggY2xhc3M9InN0MSIgZD0iTTMyMS44LDQ0MS43di00NS4yYzAtMy45LTMuMS03LTctN3MtNywzLjEtNyw3djQ1LjJjLTExLjIsMy4xLTE5LjQsMTMuMy0xOS40LDI1LjQgYzAsMTQuNSwxMS44LDI2LjQsMjYuNCwyNi40czI2LjQtMTEuOCwyNi40LTI2LjRDMzQxLjEsNDU1LDMzMi45LDQ0NC44LDMyMS44LDQ0MS43eiBNMzE0LjgsNDc5LjVjLTYuOCwwLTEyLjQtNS42LTEyLjQtMTIuNCBzNS42LTEyLjQsMTIuNC0xMi40czEyLjQsNS42LDEyLjQsMTIuNFMzMjEuNiw0NzkuNSwzMTQuOCw0NzkuNXoiLz4gPHBhdGggY2xhc3M9InN0MSIgZD0iTTIyNy41LDQyNS4xYy0xMi4xLDAtMjIuMyw4LjItMjUuNCwxOS40aC0yMXYtNDhjMC0zLjktMy4xLTctNy03cy03LDMuMS03LDd2NTVjMCwzLjksMy4xLDcsNyw3aDI4IGMzLjEsMTEuMiwxMy4zLDE5LjQsMjUuNCwxOS40YzE0LjUsMCwyNi40LTExLjgsMjYuNC0yNi40UzI0Miw0MjUuMSwyMjcuNSw0MjUuMXogTTIyNy41LDQ2My45Yy02LjgsMC0xMi40LTUuNi0xMi40LTEyLjQgczUuNi0xMi40LDEyLjQtMTIuNHMxMi40LDUuNiwxMi40LDEyLjRTMjM0LjMsNDYzLjksMjI3LjUsNDYzLjl6Ii8+IDwvZz4gPC9nPgoKPC9zdmc+Cg=="/>
+    <title>Fetch Space</title>
+    <style>
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .feature-icon-small {
+            width: 3rem;
+            height: 3rem;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1 0 auto; /* Ensures the main content takes up available space */
+        }
+
+        a {
+            color: inherit;
+            text-decoration: underline;
+            text-decoration-thickness: 0.5px;
+            text-underline-offset: 2px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            text-decoration-thickness: 0.5px;
+            text-underline-offset: 2px;
+        }
+
+        code {
+            color: inherit;
+            font-family: monospace;
+            font-size: inherit;
+        }
+
+        #terms-of-service p,
+        #terms-of-service li {
+            text-align: justify !important;
+        }
+
+        #privacy-policy p,
+        #privacy-policy li {
+            text-align: justify !important;
+        }
+    </style>
+</head>
+<body>
+<header class="d-flex flex-wrap align-items-center justify-content-center py-3 mb-4 border-bottom">
+    <div class="container d-flex align-items-center">
+        <a class="navbar-brand d-flex align-items-center" href="/">
+            <img src="data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KCjxzdmcgd2lkdGg9IjgwMHB4IiBoZWlnaHQ9IjgwMHB4IiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgaWQ9IkxheWVyXzEiIHZlcnNpb249IjEuMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgZmlsbD0iIzAwMDAwMCI+Cgo8ZyBpZD0iU1ZHUmVwb19iZ0NhcnJpZXIiIHN0cm9rZS13aWR0aD0iMCIvPgoKPGcgaWQ9IlNWR1JlcG9fdHJhY2VyQ2FycmllciIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cgo8ZyBpZD0iU1ZHUmVwb19pY29uQ2FycmllciI+IDxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+IC5zdDB7ZmlsbDojMjk3ZmZkO30gLnN0MXtmaWxsOiMzQjQ2NTI7fSA8L3N0eWxlPiA8Zz4gPHBhdGggY2xhc3M9InN0MCIgZD0iTTMzMy4yLDI0Mi41YzEuNi01LjYsMi41LTExLjYsMi41LTE3LjhjMC0zNS44LTI5LTY0LjctNjQuNy02NC43Yy0yOS4yLDAtNTMuOSwxOS40LTYyLDQ1LjkgYy00LjItMC43LTguNi0xLjEtMTMtMS4xYy00NC41LDAtODAuNiwzNi4xLTgwLjYsODAuNmMwLDQ0LjUsMzYuMSw4MC42LDgwLjYsODAuNmgxMzVjMzQuMSwwLDYxLjgtMjcuNyw2MS44LTYxLjggQzM5Mi44LDI3MC44LDM2Ni4zLDI0My42LDMzMy4yLDI0Mi41eiIvPiA8cGF0aCBjbGFzcz0ic3QxIiBkPSJNMTI3LjIsMTAxaDU4Ljl2NTAuN2MwLDMuOSwzLjEsNyw3LDdzNy0zLjEsNy03Vjk0YzAtMy45LTMuMS03LTctN2gtNjYuN2MtMy41LTEwLjQtMTMuNC0xOC0yNS0xOCBDODYuOSw2OSw3NSw4MC44LDc1LDk1LjRzMTEuOCwyNi40LDI2LjQsMjYuNEMxMTQsMTIxLjgsMTI0LjYsMTEyLjgsMTI3LjIsMTAxeiBNMTAxLjQsMTA3LjhjLTYuOCwwLTEyLjQtNS42LTEyLjQtMTIuNCBTOTQuNiw4MywxMDEuNCw4M3MxMi40LDUuNiwxMi40LDEyLjRTMTA4LjIsMTA3LjgsMTAxLjQsMTA3Ljh6Ii8+IDxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik00MjksMTIxLjhjMTQuNSwwLDI2LjQtMTEuOCwyNi40LTI2LjRTNDQzLjUsNjksNDI5LDY5Yy0xMS42LDAtMjEuNSw3LjYtMjUsMThoLTY2LjdjLTMuOSwwLTcsMy4xLTcsN3Y1Ny43IGMwLDMuOSwzLjEsNyw3LDdzNy0zLjEsNy03VjEwMWg1OC45QzQwNS44LDExMi44LDQxNi4zLDEyMS44LDQyOSwxMjEuOHogTTQyOSw4M2M2LjgsMCwxMi40LDUuNiwxMi40LDEyLjRzLTUuNiwxMi40LTEyLjQsMTIuNCBzLTEyLjQtNS42LTEyLjQtMTIuNFM0MjIuMSw4Myw0MjksODN6Ii8+IDxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0yNTUuMSw3MC4zdjYzLjJjMCwzLjksMy4xLDcsNyw3czctMy4xLDctN1Y3MC4zYzExLjItMy4xLDE5LjQtMTMuMywxOS40LTI1LjRjMC0xNC41LTExLjgtMjYuNC0yNi40LTI2LjQgcy0yNi40LDExLjgtMjYuNCwyNi40QzIzNS43LDU3LDI0NCw2Ny4yLDI1NS4xLDcwLjN6IE0yNjIuMSwzMi41YzYuOCwwLDEyLjQsNS42LDEyLjQsMTIuNHMtNS42LDEyLjQtMTIuNCwxMi40IHMtMTIuNC01LjYtMTIuNC0xMi40UzI1NS4zLDMyLjUsMjYyLjEsMzIuNXoiLz4gPHBhdGggY2xhc3M9InN0MSIgZD0iTTg1LjgsMjU1LjhINTMuMXYtNDAuOWMxMS44LTIuNiwyMC44LTEzLjIsMjAuOC0yNS44YzAtMTQuNS0xMS44LTI2LjQtMjYuNC0yNi40UzIxLjEsMTc0LjUsMjEuMSwxODkgYzAsMTEuNiw3LjYsMjEuNSwxOCwyNXY0OC43YzAsMy45LDMuMSw3LDcsN2gzOS43YzMuOSwwLDctMy4xLDctN1M4OS42LDI1NS44LDg1LjgsMjU1Ljh6IE0zNS4xLDE4OWMwLTYuOCw1LjYtMTIuNCwxMi40LTEyLjQgczEyLjQsNS42LDEyLjQsMTIuNHMtNS42LDEyLjQtMTIuNCwxMi40UzM1LjEsMTk1LjksMzUuMSwxODl6Ii8+IDxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik04NS44LDMxOC4xSDU4LjVjLTMuMS0xMS4yLTEzLjMtMTkuNC0yNS40LTE5LjRjLTE0LjUsMC0yNi40LDExLjgtMjYuNCwyNi40czExLjgsMjYuNCwyNi40LDI2LjQgYzEyLjEsMCwyMi4zLTguMiwyNS40LTE5LjRoMjcuMmMzLjksMCw3LTMuMSw3LTdTODkuNiwzMTguMSw4NS44LDMxOC4xeiBNMzMuMSwzMzcuNGMtNi44LDAtMTIuNC01LjYtMTIuNC0xMi40IHM1LjYtMTIuNCwxMi40LTEyLjRzMTIuNCw1LjYsMTIuNCwxMi40UzM5LjksMzM3LjQsMzMuMSwzMzcuNHoiLz4gPHBhdGggY2xhc3M9InN0MSIgZD0iTTQ3Mi45LDM2MHYtNDguN2MwLTMuOS0zLjEtNy03LTdoLTM5LjdjLTMuOSwwLTcsMy4xLTcsN3MzLjEsNyw3LDdoMzIuN3Y0MC45Yy0xMS44LDIuNi0yMC44LDEzLjItMjAuOCwyNS44IGMwLDE0LjUsMTEuOCwyNi40LDI2LjQsMjYuNHMyNi40LTExLjgsMjYuNC0yNi40QzQ5MC45LDM3My40LDQ4My4zLDM2My41LDQ3Mi45LDM2MHogTTQ2NC41LDM5Ny40Yy02LjgsMC0xMi40LTUuNi0xMi40LTEyLjQgczUuNi0xMi40LDEyLjQtMTIuNHMxMi40LDUuNiwxMi40LDEyLjRTNDcxLjMsMzk3LjQsNDY0LjUsMzk3LjR6Ii8+IDxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik00NzguOSwyMjIuNmMtMTIuMSwwLTIyLjMsOC4yLTI1LjQsMTkuNGgtMjcuMmMtMy45LDAtNywzLjEtNyw3czMuMSw3LDcsN2gyNy4yYzMuMSwxMS4yLDEzLjMsMTkuNCwyNS40LDE5LjQgYzE0LjUsMCwyNi40LTExLjgsMjYuNC0yNi40UzQ5My40LDIyMi42LDQ3OC45LDIyMi42eiBNNDc4LjksMjYxLjRjLTYuOCwwLTEyLjQtNS42LTEyLjQtMTIuNHM1LjYtMTIuNCwxMi40LTEyLjQgczEyLjQsNS42LDEyLjQsMTIuNFM0ODUuNywyNjEuNCw0NzguOSwyNjEuNHoiLz4gPHBhdGggY2xhc3M9InN0MSIgZD0iTTMyMS44LDQ0MS43di00NS4yYzAtMy45LTMuMS03LTctN3MtNywzLjEtNyw3djQ1LjJjLTExLjIsMy4xLTE5LjQsMTMuMy0xOS40LDI1LjQgYzAsMTQuNSwxMS44LDI2LjQsMjYuNCwyNi40czI2LjQtMTEuOCwyNi40LTI2LjRDMzQxLjEsNDU1LDMzMi45LDQ0NC44LDMyMS44LDQ0MS43eiBNMzE0LjgsNDc5LjVjLTYuOCwwLTEyLjQtNS42LTEyLjQtMTIuNCBzNS42LTEyLjQsMTIuNC0xMi40czEyLjQsNS42LDEyLjQsMTIuNFMzMjEuNiw0NzkuNSwzMTQuOCw0NzkuNXoiLz4gPHBhdGggY2xhc3M9InN0MSIgZD0iTTIyNy41LDQyNS4xYy0xMi4xLDAtMjIuMyw4LjItMjUuNCwxOS40aC0yMXYtNDhjMC0zLjktMy4xLTctNy03cy03LDMuMS03LDd2NTVjMCwzLjksMy4xLDcsNyw3aDI4IGMzLjEsMTEuMiwxMy4zLDE5LjQsMjUuNCwxOS40YzE0LjUsMCwyNi40LTExLjgsMjYuNC0yNi40UzI0Miw0MjUuMSwyMjcuNSw0MjUuMXogTTIyNy41LDQ2My45Yy02LjgsMC0xMi40LTUuNi0xMi40LTEyLjQgczUuNi0xMi40LDEyLjQtMTIuNHMxMi40LDUuNiwxMi40LDEyLjRTMjM0LjMsNDYzLjksMjI3LjUsNDYzLjl6Ii8+IDwvZz4gPC9nPgoKPC9zdmc+Cg==" alt="cloud" width="55" height="55">
+            <span class="ms-3 fw-bold" style="font-size: 2rem;">Fetch Space</span>
+        </a>
+    </div>
+</header>
+
+<main>
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+        <svg id="cloud-upload" class="bi bi-cloud-upload" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383"/>
+            <path fill-rule="evenodd"
+                  d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708z"/>
+        </svg>
+        <svg id="cloud-download" class="bi bi-cloud-download" viewBox="0 0 16 16">
+            <path d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383"/>
+            <path d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708z"/>
+        </svg>
+        <svg id="send" class="bi bi-send" viewBox="0 0 16 16">
+            <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+        </svg>
+        <svg id="wallet" class="bi bi-wallet" viewBox="0 0 16 16">
+            <path d="M0 3a2 2 0 0 1 2-2h13.5a.5.5 0 0 1 0 1H15v2a1 1 0 0 1 1 1v8.5a1.5 1.5 0 0 1-1.5 1.5h-12A2.5 2.5 0 0 1 0 12.5zm1 1.732V12.5A1.5 1.5 0 0 0 2.5 14h12a.5.5 0 0 0 .5-.5V5H2a2 2 0 0 1-1-.268M1 3a1 1 0 0 0 1 1h12V2H2a1 1 0 0 0-1 1"/>
+        </svg>
+    </svg>
+    <div class="container px-4 py-3">
+
+        <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
+            <div class="col d-flex flex-column align-items-start gap-2">
+                <h2 class="fw-bold text-body-emphasis">Send a file, get a link to it</h2>
+                <p class="text-body-secondary">Fetch Space is a Telegram bot that instantly generates a shareable link
+                    for
+                    any file you upload. Just send a file, and receive a public internet link to easily share it with
+                    anyone.</p>
+                <a href="https://t.me/FetchSpaceBot" target="_blank" class="btn btn-primary btn-lg">Start Bot</a>
+            </div>
+
+            <div class="col">
+                <div class="row row-cols-1 row-cols-sm-2 g-4">
+                    <div class="col d-flex flex-column gap-2">
+                        <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                            <svg class="bi" width="1em" height="1em">
+                                <use xlink:href="#cloud-upload"/>
+                            </svg>
+                        </div>
+                        <h4 class="fw-semibold mb-0 text-body-emphasis">Unlimited uploads</h4>
+                        <p class="text-body-secondary">Share as many files as you like - there's no limit.</p>
+                    </div>
+
+                    <div class="col d-flex flex-column gap-2">
+                        <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                            <svg class="bi" width="1em" height="1em">
+                                <use xlink:href="#wallet"/>
+                            </svg>
+                        </div>
+                        <h4 class="fw-semibold mb-0 text-body-emphasis">Free, forever</h4>
+                        <p class="text-body-secondary">We pay for file hosting so that you don't need to.</p>
+                    </div>
+
+                    <div class="col d-flex flex-column gap-2">
+                        <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                            <svg class="bi" width="1em" height="1em">
+                                <use xlink:href="#cloud-download"/>
+                            </svg>
+                        </div>
+                        <h4 class="fw-semibold mb-0 text-body-emphasis">Anonymous downloads</h4>
+                        <p class="text-body-secondary">The links you generate don’t require any account or registration
+                            to
+                            access.</p>
+                    </div>
+
+                    <div class="col d-flex flex-column gap-2">
+                        <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                            <svg class="bi" width="1em" height="1em">
+                                <use xlink:href="#send"/>
+                            </svg>
+                        </div>
+                        <h4 class="fw-semibold mb-0 text-body-emphasis">Integrated with Telegram</h4>
+                        <p class="text-body-secondary">No need to install separate apps. Everything works right within
+                            Telegram.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="py-4 border-top">
+            <h2 class="px-2 fw-bold text-body-emphasis">How to Use</h2>
+            <ol class="py-3 list-group list-group-numbered list-group-flush">
+                <li class="list-group-item" style="padding-bottom: 20px;">
+                    <strong>Start the Bot</strong>
+                    <p class="mt-2 mb-0">Open <a href="https://t.me/FetchSpaceBot" target="_blank">Fetch Space Bot</a>
+                        on
+                        Telegram and start the bot.</p>
+                </li>
+                <li class="list-group-item" style="padding-bottom: 20px; padding-top: 20px;">
+                    <strong>Upload Your File</strong>
+                    <p class="mt-2 mb-0">In the chat input area, select <em>File</em> as the input type and send it to
+                        the
+                        bot. Besides <em>File</em> as the input type, the bot also accepts videos from
+                        the gallery, music, and voice messages.</p>
+                </li>
+                <li class="list-group-item" style="padding-bottom: 20px; padding-top: 20px;">
+                    <strong>Get Your Link</strong>
+                    <p class="mt-2 mb-0">The bot will respond with a public link to the file you uploaded, such as <a
+                            href="https://fetchspace.org/api/assets.download.41d66272-51c0-4511-9b07-30e69e0c62ff.zip"
+                            target="_blank">https://fetchspace.org/api/assets.download.41d66272-51c0-4511-9b07-30e69e0c62ff.zip</a>.
+                        Anyone who has the link can anonymously, without login or
+                        registration, download the file.</p>
+                </li>
+                <li class="list-group-item" style="padding-top: 20px;">
+                    <strong>Manage Your Files</strong>
+                    <p class="mt-2 mb-0">Want to deactivate your links? Issue a <code>/clear</code> command to delete
+                        all
+                        files you've uploaded to the bot. Once deleted, the links to deleted files will no longer work.
+                    </p>
+                </li>
+            </ol>
+        </section>
+    </div>
+</main>
+
+<footer class="d-flex justify-content-between align-items-center py-3 border-top">
+    <div class="container d-flex justify-content-between align-items-center">
+        <span class="text-body-secondary">&copy; <span id="year-placeholder"></span> Herman Ciechanowiec</span>
+
+        <ul class="nav">
+            <li class="nav-item"><a href="mailto:herman@ciechanowiec.eu"
+                                    class="nav-link px-2 text-body-secondary">Support</a></li>
+            <li class="nav-item"><a href="terms" class="nav-link px-2 text-body-secondary">Terms
+                of
+                Service</a></li>
+            <li class="nav-item"><a href="privacy" class="nav-link px-2 text-body-secondary">Privacy
+                Policy</a></li>
+            <li class="nav-item"><a href="https://github.com/ciechanowiec/fetchspace" target="_blank"
+                                    class="nav-link px-2 text-body-secondary">GitHub</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+<script>
+    document.getElementById('year-placeholder').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

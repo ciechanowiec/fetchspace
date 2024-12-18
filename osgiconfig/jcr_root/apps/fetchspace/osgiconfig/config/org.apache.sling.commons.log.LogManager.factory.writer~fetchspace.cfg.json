@@ -1,0 +1,5 @@
+{
+  "org.apache.sling.commons.log.file": "logs/fetchspace.log",
+  "org.apache.sling.commons.log.file.number": 30,
+  "org.apache.sling.commons.log.file.size": "'.'yyyy-MM-dd"
+}

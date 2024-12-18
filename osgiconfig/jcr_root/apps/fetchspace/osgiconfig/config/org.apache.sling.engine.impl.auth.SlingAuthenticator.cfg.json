@@ -1,0 +1,8 @@
+{
+  "auth.annonymous": false,
+  "sling.auth.requirements": [
+    "+/",
+    "-/api/assets.download",
+    "-/content/fetchspace/www"
+  ]
+}
