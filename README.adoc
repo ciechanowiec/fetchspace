@@ -86,17 +86,21 @@ CHATS_WITH_MODERATORS_IDS=...
 
     docker compose up -d
 
-. Set a new password for the `admin` user of https://github.com/ciechanowiec/sling_rocket[Sling Rocket]:
+. Save a new password for the `admin` user of https://github.com/ciechanowiec/sling_rocket[Sling Rocket] in a variable:
+
+    export NEW_ROCKET_PASSWORD=NEW_ROCKET_PASSWORD_VALUE
+
+. Set the new password for the `admin` user of https://github.com/ciechanowiec/sling_rocket[Sling Rocket]:
 +
 [source,bash]
 ....
-curl --user "admin:admin" --verbose -FoldPwd=admin -FnewPwd=NEW_PASSWORD -FnewPwdConfirm=NEW_PASSWORD \
+curl --user "admin:admin" --verbose -FoldPwd=admin -FnewPwd="$NEW_ROCKET_PASSWORD" -FnewPwdConfirm="$NEW_ROCKET_PASSWORD" \
   http://localhost:8080/system/userManager/user/admin.changePassword.html
 ....
 
 . Build the _Fetch Space_ application and deploy it into the running _Sling Rocket_ instance:
 
-    mvn clean install -P installAll -D sling.password=NEW_PASSWORD
+    mvn clean install -P installAll -D sling.password="$NEW_ROCKET_PASSWORD"
 
 == License
 The program is subject to MIT No Attribution License
