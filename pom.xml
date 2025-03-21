@@ -7,12 +7,12 @@
     <parent>
         <groupId>eu.ciechanowiec</groupId>
         <artifactId>sling.rocket.parent</artifactId>
-        <version>14.0.0</version>
+        <version>14.0.2</version>
     </parent>
 
     <groupId>eu.ciechanowiec</groupId>
     <artifactId>fetchspace</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.4</version>
     <packaging>pom</packaging>
 
     <name>Fetch Space - Parent POM</name>
