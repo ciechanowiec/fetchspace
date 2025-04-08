@@ -11,17 +11,17 @@ class TextWithLink {
 
     TextWithLink(TGUpdate tgUpdate, DownloadLink downloadLink) {
         textSupplier = new MemoizingSupplier<>(
-                () -> tgUpdate.tgMessage()
-                        .tgDocument()
-                        .map(TGAsset.class::cast)
-                        .or(() -> tgUpdate.tgMessage().tgVideo())
-                        .or(() -> tgUpdate.tgMessage().tgAudio())
-                        .or(() -> tgUpdate.tgMessage().tgVoice())
-                        .or(() -> new UnaryTGPhoto(tgUpdate).get())
-                        .flatMap(TGAsset::asset)
-                        .map(downloadLink::generate)
-                        .map(link -> "📥 Here is the download link:%n%n<a href=\"%s\">%s</a>".formatted(link, link))
-                        .orElse("Unable to generate the download link. Try again via sending a file as an attachment 📎")
+            () -> tgUpdate.tgMessage()
+                .tgDocument()
+                .map(TGAsset.class::cast)
+                .or(() -> tgUpdate.tgMessage().tgVideo())
+                .or(() -> tgUpdate.tgMessage().tgAudio())
+                .or(() -> tgUpdate.tgMessage().tgVoice())
+                .or(() -> new UnaryTGPhoto(tgUpdate).get())
+                .flatMap(TGAsset::asset)
+                .map(downloadLink::generate)
+                .map(link -> "📥 Here is the download link:%n%n<a href=\"%s\">%s</a>".formatted(link, link))
+                .orElse("Unable to generate the download link. Try again via sending a file as an attachment 📎")
         );
     }
 

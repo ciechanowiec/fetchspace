@@ -1,7 +1,6 @@
 package eu.ciechanowiec.fetchspace;
 
 import eu.ciechanowiec.sling.rocket.commons.ResourceAccess;
-import eu.ciechanowiec.sling.rocket.unit.DataSize;
 import eu.ciechanowiec.sling.telegram.TGUpdateBasic;
 import eu.ciechanowiec.sling.telegram.api.TGUpdate;
 import eu.ciechanowiec.sling.telegram.api.TGUpdatesRegistrar;
@@ -24,10 +23,10 @@ class RejectTooBig {
     }
 
     @SneakyThrows
-    void reject(TGUpdate tgUpdate, DataSize maxDocumentSize) {
+    void reject(TGUpdate tgUpdate, MaxTGFileUploadSize maxTGFileUploadSize) {
         log.trace("Rejecting too big file from {}", tgUpdate);
         String messageText = "🚧 The file you've sent is too big. Maximum size is %dMB. Try again with a smaller file."
-                        .formatted((int) maxDocumentSize.megabytes());
+            .formatted((int) maxTGFileUploadSize.value().megabytes());
         SendMessage sendMessage = new SendMessage(tgUpdate.tgChatID().asString(), messageText);
         sendMessage.setParseMode(ParseMode.HTML);
         sendMessage.setReplyToMessageId(tgUpdate.tgMessage().tgMessageID().asInt());

@@ -4,9 +4,8 @@ import eu.ciechanowiec.conditional.Conditional;
 import eu.ciechanowiec.sling.telegram.api.TGAssets;
 import eu.ciechanowiec.sling.telegram.api.TGPhoto;
 import eu.ciechanowiec.sling.telegram.api.TGUpdate;
-import org.apache.commons.lang3.math.NumberUtils;
-
 import java.util.Optional;
+import org.apache.commons.lang3.math.NumberUtils;
 
 class UnaryTGPhoto {
 
@@ -21,8 +20,8 @@ class UnaryTGPhoto {
         TGAssets<TGPhoto> tgPhotos = tgUpdate.tgMessage().tgPhotos();
         boolean isUnaryPhoto = tgPhotos.all().size() == NumberUtils.INTEGER_ONE;
         return (Optional<TGPhoto>) Conditional.conditional(isUnaryPhoto)
-                .onTrue(() -> tgPhotos.all().stream().findFirst())
-                .onFalse(() -> Optional.empty())
-                .get(Optional.class);
+            .onTrue(() -> tgPhotos.all().stream().findFirst())
+            .onFalse(() -> Optional.empty())
+            .get(Optional.class);
     }
 }

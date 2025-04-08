@@ -4,5 +4,6 @@
   "name": "📥 Fetch Space",
   "description": "Handy bot that instantly generates a shareable link for any file you upload. Just send a file, and receive a public internet link to easily share it with anyone 🌐",
   "short-description": "Send a file, get a link to it",
-  "jcr.home": "/content/homes/fetchspace"
+  "jcr.home": "/content/homes/fetchspace",
+  "telegram.url": "$[env:TELEGRAM_URL;type=String;default=https://api.telegram.org:443]"
 }

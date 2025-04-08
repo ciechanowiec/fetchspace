@@ -4,7 +4,7 @@
     "eu.ciechanowiec.sling.telegram",
     "eu.ciechanowiec.sling.rocket"
   ],
-  "org.apache.sling.commons.log.level": "DEBUG",
+  "org.apache.sling.commons.log.level": "$[env:FETCH_SPACE_LOG_LEVEL;type=String;default=DEBUG]",
   "org.apache.sling.commons.log.file": "logs/fetchspace.log",
   "org.apache.sling.commons.log.additiv": "false"
 }

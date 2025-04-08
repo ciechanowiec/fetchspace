@@ -14,12 +14,21 @@ services:
       BOT_TOKEN_PROD: ${BOT_TOKEN_PROD}
       BOT_TOKEN_STAGING: ${BOT_TOKEN_STAGING}
       CHATS_WITH_MODERATORS_IDS: ${CHATS_WITH_MODERATORS_IDS}
-    image: ciechanowiec/rocket-instance:14.0.2
+      TELEGRAM_URL: "http://telegram-bot-api:8081"
+      TG_FILE_MAX_UPLOAD_SIZE_BYTES: 2147483648 # 2 GB
+      FETCH_SPACE_LOG_LEVEL: "DEBUG"
+    image: ciechanowiec/rocket-instance:14.0.4
     container_name: rocket-instance
     volumes:
       - type: volume
-        source: rocket-data
+        source: rocket-data-raw
         target: /opt/sling/launcher/repository/segmentstore
+      - type: volume
+        source: rocket-data-dump
+        target: /var/rocket-data-dump
+      - type: volume
+        source: telegram-bot-api-data
+        target: /var/lib/telegram-bot-api
     # Grace period should be long enough so that the JCR is closed correctly and doesn't get corrupted:
     stop_grace_period: 300s
     hostname: rocket-instance
@@ -33,20 +42,41 @@ services:
         mode: host
     labels:
       - "docker-volume-backup.stop-during-backup=false"
+      - "docker-volume-backup.archive-pre=/bin/sh -c '/opt/sling/dump-rocket-data.sh'"
 
-  backup:
+  telegram-bot-api:
+    environment:
+      TELEGRAM_API_ID: ${TELEGRAM_API_ID}
+      TELEGRAM_API_HASH: ${TELEGRAM_API_HASH}
+      TELEGRAM_LOCAL: 1
+    image: aiogram/telegram-bot-api:8.3
+    container_name: telegram-bot-api
+    volumes:
+      - type: volume
+        source: telegram-bot-api-data
+        target: /var/lib/telegram-bot-api
+    stop_grace_period: 30s
+    hostname: telegram-bot-api
+    networks:
+      - rocket-network
+
+  rocket-backuper:
     environment:
       # Every day at 1:00 a.m.
       BACKUP_CRON_EXPRESSION: "0 1 * * *"
-      BACKUP_FILENAME: backup-%Y-%m-%dT%H-%M-%S.tar.gz
-      BACKUP_PRUNING_PREFIX: backup-
+      BACKUP_FILENAME: rocket-backup-%Y-%m-%dT%H-%M-%S.tar.gz
+      BACKUP_PRUNING_PREFIX: rocket-backup-
       BACKUP_RETENTION_DAYS: 7
     image: offen/docker-volume-backup:v2
-    container_name: backup
+    container_name: rocket-backuper
     volumes:
       - type: volume
-        source: rocket-data
-        target: /backup/rocket
+        source: rocket-data-raw
+        target: /backup/rocket-data-raw
+        read_only: true
+      - type: volume
+        source: rocket-data-dump
+        target: /backup/rocket-data-dump
         read_only: true
       - type: bind
         source: /var/run/docker.sock
@@ -58,7 +88,7 @@ services:
         read_only: false
     # Grace period should be long enough so that the JCR is closed correctly and doesn't get corrupted:
     stop_grace_period: 300s
-    hostname: backup
+    hostname: rocket-backuper
     networks:
       - rocket-network
     depends_on:
@@ -69,7 +99,7 @@ services:
       DOMAIN: fetchspace.org
       EMAIL: herman@ciechanowiec.eu
       IS_STAGING_ENV: ${IS_STAGING_ENV}
-    image: ciechanowiec/rocket-nginx:14.0.2
+    image: ciechanowiec/rocket-nginx:14.0.4
     container_name: rocket-nginx
     volumes:
       - type: bind
@@ -94,8 +124,12 @@ services:
         mode: host
 
 volumes:
-  rocket-data:
-    name: "rocket-data"
+  rocket-data-raw:
+    name: "rocket-data-raw"
+  rocket-data-dump:
+    name: "rocket-data-dump"
+  telegram-bot-api-data:
+    name: "telegram-bot-api-data"
 
 networks:
   rocket-network:

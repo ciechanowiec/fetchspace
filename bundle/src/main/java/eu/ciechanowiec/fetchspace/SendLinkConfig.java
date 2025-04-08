@@ -8,10 +8,10 @@ import org.osgi.service.metatype.annotations.ObjectClassDefinition;
 public @interface SendLinkConfig {
 
     @AttributeDefinition(
-            name = "IDs of Chats with Moderators",
-            description = "All successful send link messages will be additionally sent to chats with moderators "
-                        + "specified in this configuration",
-            type = AttributeType.STRING
+        name = "IDs of Chats with Moderators",
+        description = "All successful send link messages will be additionally sent to chats with moderators "
+            + "specified in this configuration",
+        type = AttributeType.STRING
     )
     @SuppressWarnings("squid:S100")
     String[] chats$_$with$_$moderators_ids() default {};

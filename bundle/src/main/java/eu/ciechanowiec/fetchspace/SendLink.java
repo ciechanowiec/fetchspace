@@ -8,10 +8,16 @@ import eu.ciechanowiec.sling.telegram.api.TGUpdate;
 import eu.ciechanowiec.sling.telegram.api.TGUpdatesReceiver;
 import eu.ciechanowiec.sling.telegram.api.TGUpdatesRegistrar;
 import eu.ciechanowiec.sneakyfun.SneakyConsumer;
+import java.util.stream.Stream;
 import lombok.SneakyThrows;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
-import org.osgi.service.component.annotations.*;
+import org.osgi.service.component.annotations.Activate;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.ConfigurationPolicy;
+import org.osgi.service.component.annotations.Modified;
+import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.propertytypes.ServiceDescription;
 import org.osgi.service.metatype.annotations.Designate;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
@@ -19,17 +25,15 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
 
-import java.util.stream.Stream;
-
 @Component(
-        service = {SendLink.class, TGUpdatesReceiver.class},
-        immediate = true,
-        configurationPolicy = ConfigurationPolicy.OPTIONAL
+    service = {SendLink.class, TGUpdatesReceiver.class},
+    immediate = true,
+    configurationPolicy = ConfigurationPolicy.OPTIONAL
 )
 @Slf4j
 @ToString
 @Designate(
-        ocd = SendLinkConfig.class
+    ocd = SendLinkConfig.class
 )
 @ServiceDescription("Sends to a TG user a link to the document attached to the passed update")
 public class SendLink implements TGUpdatesReceiver {
@@ -41,13 +45,13 @@ public class SendLink implements TGUpdatesReceiver {
 
     @Activate
     public SendLink(
-            @Reference(cardinality = ReferenceCardinality.MANDATORY)
-            DownloadLink downloadLink,
-            @Reference(cardinality = ReferenceCardinality.MANDATORY)
-            TGUpdatesRegistrar tgUpdatesRegistrar,
-            @Reference(cardinality = ReferenceCardinality.MANDATORY)
-            ResourceAccess resourceAccess,
-            SendLinkConfig config
+        @Reference(cardinality = ReferenceCardinality.MANDATORY)
+        DownloadLink downloadLink,
+        @Reference(cardinality = ReferenceCardinality.MANDATORY)
+        TGUpdatesRegistrar tgUpdatesRegistrar,
+        @Reference(cardinality = ReferenceCardinality.MANDATORY)
+        ResourceAccess resourceAccess,
+        SendLinkConfig config
     ) {
         this.downloadLink = downloadLink;
         this.tgUpdatesRegistrar = tgUpdatesRegistrar;
@@ -78,24 +82,24 @@ public class SendLink implements TGUpdatesReceiver {
         update.setMessage(sentMessageToRequester);
         tgUpdatesRegistrar.register(new TGUpdateBasic(update, tgUpdate.tgBot(), resourceAccess));
         Conditional.onTrueExecute(
-                textMessage.contains("Here is the download link"),
-                () -> Stream.of(config.chats$_$with$_$moderators_ids()).forEach(
-                        SneakyConsumer.sneaky(
-                                moderatorChatID -> {
-                                    SendMessage messageForModerator = new SendMessage(moderatorChatID, textMessage);
-                                    messageForModerator.setParseMode(ParseMode.HTML);
-                                    Message sentMessageToModerator = tgUpdate.tgBot()
-                                                                             .tgIOGate()
-                                                                             .execute(messageForModerator);
-                                    log.debug("Sent {}", sentMessageToModerator);
-                                    Update updateForModerator = new Update();
-                                    updateForModerator.setMessage(sentMessageToModerator);
-                                    tgUpdatesRegistrar.register(
-                                            new TGUpdateBasic(updateForModerator, tgUpdate.tgBot(), resourceAccess)
-                                    );
-                                }
-                        )
+            textMessage.contains("Here is the download link"),
+            () -> Stream.of(config.chats$_$with$_$moderators_ids()).forEach(
+                SneakyConsumer.sneaky(
+                    moderatorChatID -> {
+                        SendMessage messageForModerator = new SendMessage(moderatorChatID, textMessage);
+                        messageForModerator.setParseMode(ParseMode.HTML);
+                        Message sentMessageToModerator = tgUpdate.tgBot()
+                            .tgIOGate()
+                            .execute(messageForModerator);
+                        log.debug("Sent {}", sentMessageToModerator);
+                        Update updateForModerator = new Update();
+                        updateForModerator.setMessage(sentMessageToModerator);
+                        tgUpdatesRegistrar.register(
+                            new TGUpdateBasic(updateForModerator, tgUpdate.tgBot(), resourceAccess)
+                        );
+                    }
                 )
+            )
         );
     }
 }

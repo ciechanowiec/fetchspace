@@ -5,7 +5,12 @@ import eu.ciechanowiec.sling.rocket.commons.FullResourceAccess;
 import eu.ciechanowiec.sling.rocket.jcr.DeletableResource;
 import eu.ciechanowiec.sling.rocket.jcr.path.JCRPath;
 import eu.ciechanowiec.sling.telegram.TGUpdateBasic;
-import eu.ciechanowiec.sling.telegram.api.*;
+import eu.ciechanowiec.sling.telegram.api.TGChats;
+import eu.ciechanowiec.sling.telegram.api.TGCommand;
+import eu.ciechanowiec.sling.telegram.api.TGCommands;
+import eu.ciechanowiec.sling.telegram.api.TGUpdate;
+import eu.ciechanowiec.sling.telegram.api.TGUpdatesRegistrar;
+import java.util.Optional;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.osgi.service.component.annotations.Activate;
@@ -17,11 +22,9 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
 
-import java.util.Optional;
-
 @Component(
-        service = {WithMappedTGCommand.class, ClearCommandAction.class},
-        immediate = true
+    service = {WithMappedTGCommand.class, ClearCommandAction.class},
+    immediate = true
 )
 @Slf4j
 @ServiceDescription("Action for '/clear' command")
@@ -34,14 +37,14 @@ public class ClearCommandAction implements WithMappedTGCommand {
 
     @Activate
     public ClearCommandAction(
-            @Reference(cardinality = ReferenceCardinality.MANDATORY)
-            TGCommands tgCommands,
-            @Reference(cardinality = ReferenceCardinality.MANDATORY)
-            TGChats tgChats,
-            @Reference(cardinality = ReferenceCardinality.MANDATORY)
-            TGUpdatesRegistrar tgUpdatesRegistrar,
-            @Reference(cardinality = ReferenceCardinality.MANDATORY)
-            FullResourceAccess fullResourceAccess
+        @Reference(cardinality = ReferenceCardinality.MANDATORY)
+        TGCommands tgCommands,
+        @Reference(cardinality = ReferenceCardinality.MANDATORY)
+        TGChats tgChats,
+        @Reference(cardinality = ReferenceCardinality.MANDATORY)
+        TGUpdatesRegistrar tgUpdatesRegistrar,
+        @Reference(cardinality = ReferenceCardinality.MANDATORY)
+        FullResourceAccess fullResourceAccess
     ) {
         this.tgCommands = tgCommands;
         this.tgChats = tgChats;
@@ -61,15 +64,15 @@ public class ClearCommandAction implements WithMappedTGCommand {
         JCRPath chatJCRPath = tgChats.getOrCreate(tgUpdate, tgUpdate.tgBot()).jcrPath();
         log.debug("Deleting all assets in {}", chatJCRPath);
         new AssetsRepository(fullResourceAccess).find(chatJCRPath)
-                .stream()
-                .map(asset -> new DeletableResource(asset, fullResourceAccess))
-                .map(DeletableResource::delete)
-                .flatMap(Optional::stream)
-                .forEach(deleted -> log.trace("Deleted {}", deleted));
+            .stream()
+            .map(asset -> new DeletableResource(asset, fullResourceAccess))
+            .map(DeletableResource::delete)
+            .flatMap(Optional::stream)
+            .forEach(deleted -> log.trace("Deleted {}", deleted));
         SendMessage sendMessage = new SendMessage(
-                tgUpdate.tgChatID().asString(),
-                "All files that you uploaded to this bot were deleted "
-                   + "and will not be available for downloading anymore 🗑️"
+            tgUpdate.tgChatID().asString(),
+            "All files that you uploaded to this bot were deleted "
+                + "and will not be available for downloading anymore 🗑️"
         );
         sendMessage.setReplyToMessageId(tgUpdate.tgMessage().tgMessageID().asInt());
         Message sentMessage = tgUpdate.tgBot().tgIOGate().execute(sendMessage);

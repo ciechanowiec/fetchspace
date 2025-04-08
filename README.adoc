@@ -25,7 +25,7 @@ _Fetch Space_ is a https://telegram.org/[Telegram] bot that instantly generates 
 [upperalpha]
 . *Unlimited Uploads*
 +
-Share as many files as you like - there's no limit.
+Share as many files as you like - there's no limit. Each file can be up to 2GB in size.
 
 . *Anonymous Downloads*
 +
@@ -80,6 +80,10 @@ IS_STAGING_ENV=true
 BOT_TOKEN_PROD=...
 BOT_TOKEN_STAGING=...
 CHATS_WITH_MODERATORS_IDS=...
+# `api_id` for Telegram Bot API Server (https://core.telegram.org/api/obtaining_api_id#obtaining-api-id):
+TELEGRAM_API_ID=...
+# `api_hash` for Telegram Bot API Server (https://core.telegram.org/api/obtaining_api_id#obtaining-api-id):
+TELEGRAM_API_HASH=...
 ....
 
 . Start https://github.com/ciechanowiec/sling_rocket[Sling Rocket]:

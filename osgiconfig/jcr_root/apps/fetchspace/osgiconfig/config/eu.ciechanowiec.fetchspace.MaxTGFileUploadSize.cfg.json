@@ -1,0 +1,3 @@
+{
+  "tg-file.max-upload-size.bytes": "$[env:TG_FILE_MAX_UPLOAD_SIZE_BYTES;type=Long;default=2147483648]"
+}

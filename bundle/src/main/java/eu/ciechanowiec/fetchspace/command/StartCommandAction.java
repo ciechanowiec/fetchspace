@@ -18,8 +18,8 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
 
 @Component(
-        service = {WithMappedTGCommand.class, StartCommandAction.class},
-        immediate = true
+    service = {WithMappedTGCommand.class, StartCommandAction.class},
+    immediate = true
 )
 @Slf4j
 @ServiceDescription("Action for '/start' command")
@@ -31,12 +31,12 @@ public class StartCommandAction implements WithMappedTGCommand {
 
     @Activate
     public StartCommandAction(
-            @Reference(cardinality = ReferenceCardinality.MANDATORY)
-            TGCommands tgCommands,
-            @Reference(cardinality = ReferenceCardinality.MANDATORY)
-            TGUpdatesRegistrar tgUpdatesRegistrar,
-            @Reference(cardinality = ReferenceCardinality.MANDATORY)
-            FullResourceAccess fullResourceAccess
+        @Reference(cardinality = ReferenceCardinality.MANDATORY)
+        TGCommands tgCommands,
+        @Reference(cardinality = ReferenceCardinality.MANDATORY)
+        TGUpdatesRegistrar tgUpdatesRegistrar,
+        @Reference(cardinality = ReferenceCardinality.MANDATORY)
+        FullResourceAccess fullResourceAccess
     ) {
         this.tgCommands = tgCommands;
         this.tgUpdatesRegistrar = tgUpdatesRegistrar;
@@ -53,9 +53,9 @@ public class StartCommandAction implements WithMappedTGCommand {
     public void receive(TGUpdate tgUpdate) {
         log.trace("Received {}", tgUpdate);
         SendMessage sendMessage = new SendMessage(
-                tgUpdate.tgChatID().asString(),
-                "This bot instantly generates a shareable link for any file you upload. Just send a file "
-                   + "as an attachment, and receive a public internet link to easily share it with anyone 🌐"
+            tgUpdate.tgChatID().asString(),
+            "This bot instantly generates a shareable link for any file you upload. Just send a file "
+                + "as an attachment, and receive a public internet link to easily share it with anyone 🌐"
         );
         sendMessage.setReplyToMessageId(tgUpdate.tgMessage().tgMessageID().asInt());
         Message sentMessage = tgUpdate.tgBot().tgIOGate().execute(sendMessage);
