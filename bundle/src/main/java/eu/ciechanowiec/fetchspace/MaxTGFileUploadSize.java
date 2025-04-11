@@ -46,7 +46,7 @@ public class MaxTGFileUploadSize {
     @SuppressWarnings("MagicNumber")
     boolean isRiskySize(TGUpdate tgUpdate) {
         return new SizeOfTGFileFromTGUpdate(tgUpdate).get()
-            .map(size -> size.biggerThan(new DataSize(400, DataUnit.MEGABYTES)))
+            .map(size -> size.biggerThan(new DataSize(200, DataUnit.MEGABYTES)))
             .orElse(false);
     }
 

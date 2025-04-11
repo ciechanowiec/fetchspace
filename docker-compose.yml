@@ -17,7 +17,7 @@ services:
       TELEGRAM_URL: "http://telegram-bot-api:8081"
       TG_FILE_MAX_UPLOAD_SIZE_BYTES: 2147483648 # 2 GB
       FETCH_SPACE_LOG_LEVEL: "DEBUG"
-    image: ciechanowiec/rocket-instance:14.0.4
+    image: ciechanowiec/rocket-instance:15.0.0-SNAPSHOT
     container_name: rocket-instance
     volumes:
       - type: volume
@@ -99,7 +99,7 @@ services:
       DOMAIN: fetchspace.org
       EMAIL: herman@ciechanowiec.eu
       IS_STAGING_ENV: ${IS_STAGING_ENV}
-    image: ciechanowiec/rocket-nginx:14.0.4
+    image: ciechanowiec/rocket-nginx:15.0.0-SNAPSHOT
     container_name: rocket-nginx
     volumes:
       - type: bind
