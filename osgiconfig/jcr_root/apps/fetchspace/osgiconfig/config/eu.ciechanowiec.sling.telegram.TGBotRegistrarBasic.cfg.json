@@ -1,0 +1,3 @@
+{
+  "telegram.url": "$[env:TELEGRAM_URL;type=String;default=https://api.telegram.org:443]"
+}
