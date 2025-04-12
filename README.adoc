@@ -67,7 +67,7 @@ The steps below describe the deployment procedure of a new instance of a _Fetch 
 [upperalpha]
 . Remove all preceding _Fetch Space_ containers, images, volumes and networks:
 
-    docker stop rocket-instance rocket-nginx backup; docker rm rocket-instance rocket-nginx backup; docker volume rm rocket-data; docker network rm rocket-network
+    docker stop rocket-instance telegram-bot-api rocket-backuper rocket-nginx; docker rm rocket-instance telegram-bot-api rocket-backuper rocket-nginx; docker volume rm rocket-data-raw rocket-data-dump telegram-bot-api-data; docker network rm rocket-network
 
 . Go to the root of this code repository in terminal.
 . Create a `.env` file in the root of this code repository and set there required deployment variables. The file should have this structure:
