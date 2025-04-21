@@ -66,7 +66,7 @@ services:
       BACKUP_CRON_EXPRESSION: "0 1 */2 * *"
       BACKUP_FILENAME: rocket-backup-%Y-%m-%dT%H-%M-%S.tar.gz
       BACKUP_PRUNING_PREFIX: rocket-backup-
-      BACKUP_RETENTION_DAYS: 5
+      BACKUP_RETENTION_DAYS: 4
     image: offen/docker-volume-backup:v2
     container_name: rocket-backuper
     volumes:
